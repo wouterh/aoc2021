@@ -26,3 +26,19 @@ func ReadNumbers(filename string) ([]int64, error) {
 	return result, nil
 
 }
+
+func ReadStrings(filename string) ([]string, error) {
+	file, err := os.Open(filename)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+
+	result := []string{}
+	for scanner.Scan() {
+		result = append(result, scanner.Text())
+	}
+	return result, nil
+}
