@@ -23,6 +23,9 @@ func ReadNumbers(filename string) ([]int64, error) {
 		}
 		result = append(result, n)
 	}
+	if scanner.Err() != nil {
+		return nil, err
+	}
 	return result, nil
 
 }
@@ -39,6 +42,9 @@ func ReadStrings(filename string) ([]string, error) {
 	result := []string{}
 	for scanner.Scan() {
 		result = append(result, scanner.Text())
+	}
+	if scanner.Err() != nil {
+		return nil, err
 	}
 	return result, nil
 }
