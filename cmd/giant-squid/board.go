@@ -11,14 +11,14 @@ type Square struct {
 }
 
 type Board struct {
-	squares [][]*Square
+	squares [][]Square
 }
 
 func NewBoard(lines []string) (*Board, error) {
 	board := &Board{}
-	board.squares = make([][]*Square, 5)
+	board.squares = make([][]Square, 5)
 	for i, line := range lines {
-		board.squares[i] = []*Square{}
+		board.squares[i] = []Square{}
 		parts := strings.Split(line, " ")
 		for _, part := range parts {
 			if part != "" {
@@ -26,7 +26,7 @@ func NewBoard(lines []string) (*Board, error) {
 				if err != nil {
 					return nil, err
 				}
-				board.squares[i] = append(board.squares[i], &Square{value: v})
+				board.squares[i] = append(board.squares[i], Square{value: v})
 			}
 		}
 	}
@@ -34,10 +34,10 @@ func NewBoard(lines []string) (*Board, error) {
 }
 
 func (b *Board) Draw(drawn int) {
-	for _, row := range b.squares {
-		for _, square := range row {
+	for i, row := range b.squares {
+		for j, square := range row {
 			if square.value == drawn {
-				square.marked = true
+				b.squares[i][j].marked = true
 				return
 			}
 		}
