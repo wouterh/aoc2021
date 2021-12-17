@@ -18,10 +18,20 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	// Part 1
 	cave, err := NewChitonCave(lines)
 	if err != nil {
 		panic(err)
 	}
 	reversedShortest := cave.ShortestPath(Coord{X: 0, Y: 0}, Coord{X: cave.XSize - 1, Y: cave.YSize - 1})
 	fmt.Println("Risk for part 1:", riskFor(reversedShortest))
+
+	// Part 2
+	cave, err = NewExpandedChitonCave(lines)
+	// cave.Print()
+	if err != nil {
+		panic(err)
+	}
+	reversedShortest = cave.ShortestPath(Coord{X: 0, Y: 0}, Coord{X: cave.XSize - 1, Y: cave.YSize - 1})
+	fmt.Println("Risk for part 2:", riskFor(reversedShortest))
 }
